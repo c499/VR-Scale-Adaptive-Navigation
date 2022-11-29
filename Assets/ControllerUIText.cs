@@ -11,8 +11,9 @@ public class ControllerUIText : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        string ScalingFactorText = ScalingField.SetScalingFactor.ToString();
-        string ScalingTrueText = ScalingField.ScalingIsTrue.ToString();
-        ScalingText.text = "Scaling: " + ScalingFactorText + "\n" + ScalingTrueText;
+        float SF = ScalingField.ScalingFactor + 1.0f;
+        SF = Mathf.Round(SF * 10f) / 10f;
+        string ScalingFactorText = SF.ToString();
+        ScalingText.text = "Scaling: " + ScalingFactorText;
     }
 }
