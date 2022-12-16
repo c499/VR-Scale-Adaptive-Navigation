@@ -12,7 +12,7 @@ public class HandPresence : MonoBehaviour
     void Start()
     {
         List<InputDevice> devices = new List<InputDevice>();
-        InputDeviceCharacteristics rightControllerCharacteristics = InputDeviceCharacteristics.Right | InputDeviceCharacteristics.Controller;
+        //InputDeviceCharacteristics rightControllerCharacteristics = InputDeviceCharacteristics.Right | InputDeviceCharacteristics.Controller;
         InputDevices.GetDevices(devices);
 
         foreach (var item in devices)
