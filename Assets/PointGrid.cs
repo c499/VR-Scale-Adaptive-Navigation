@@ -5,15 +5,20 @@ using UnityEngine;
 public class PointGrid : MonoBehaviour
 {
     // Number of points in each dimension of the grid
-    public int numPointsX = 10;
-    public int numPointsY = 10;
+    public int numPointsX = 20;
+    public int numPointsY = 20;
+    public float firstX = 0.0f;
+    public float firstY = 0.0f;
+    public float secondX = 5.0f;
+    public float secondY = 5.0f;
     private int numLinesX;
     private int numLinesY;
-    public float restLength = 0.1f;
-    public float intensity = 1.0f;
+    public float restLength = 0.05f;
+    public float intensity = 8.0f;
 
     // Spacing between points
-    public float pointSpacing = 0.2f;
+    private float pointSpacingX;
+    private float pointSpacingY;
 
     // Prefab for the point game objects
     public GameObject pointPrefab;
@@ -30,6 +35,9 @@ public class PointGrid : MonoBehaviour
         linesHorizontalK = new float [numPointsX, numPointsY];
         linesVerticalK = new float [numPointsX, numPointsY];
 
+        pointSpacingX = (secondX - firstX) / (numPointsX - 1);
+        pointSpacingY = (secondY - firstY) / (numPointsY - 1);
+
         numLinesX = numPointsX - 1;
         numLinesY = numPointsY - 1;
 
@@ -39,7 +47,7 @@ public class PointGrid : MonoBehaviour
             for (int x = 0; x < numPointsX; x++)
             {
                 // Calculate the position of the point
-                Vector3 pointPosition = new Vector3(x * pointSpacing, 0.0f, y * pointSpacing);
+                Vector3 pointPosition = new Vector3(firstX + (x * pointSpacingX), 0.0f, firstY + (y * pointSpacingY));
 
                 // Create the point game object and add it to the scene
                 GameObject point = Instantiate(pointPrefab, pointPosition, Quaternion.identity);
@@ -53,9 +61,9 @@ public class PointGrid : MonoBehaviour
 
         for (int y = 0; y < numLinesX; y++)
         {
-            for (int x = 0; x < numPointsY; x++) //All Horizontal lines
+            for (int x = 0; x < numPointsY; x++) //Determine k value for all Horizontal lines
             {
-                Vector3 lineCentre = new Vector3((pointSpacing / 2 + pointSpacing * x), 0, y);
+                Vector3 lineCentre = new Vector3(firstX + (pointSpacingX / 2 + pointSpacingX * x), 0, firstY + y * pointSpacingY);
                 linesHorizontalK[x,y] = kFromXY(lineCentre);
                 //Debug.Log(linesHorizontalK[x,y]);
             }
@@ -63,9 +71,9 @@ public class PointGrid : MonoBehaviour
 
         for (int y = 0; y < numLinesY; y++)
         {
-            for (int x = 0; x < numPointsX; x++) //All Vertical lines
+            for (int x = 0; x < numPointsX; x++) //Determine k value for all Vertical lines
             {
-                Vector3 lineCentre = new Vector3(x, 0, (pointSpacing / 2 + pointSpacing * y));
+                Vector3 lineCentre = new Vector3(firstX + x * pointSpacingX, 0, firstY + (pointSpacingY / 2 + pointSpacingY * y));
                 linesVerticalK[x,y] = kFromXY(lineCentre);
             }
         }
@@ -92,7 +100,7 @@ public class PointGrid : MonoBehaviour
                 {
                     if (dir == up){
                         k = linesVerticalK[x,y];
-                        Debug.Log(k);
+                        // Debug.Log(k);
                     }
                     else if (dir == right){
                         k = linesHorizontalK[x,y];
@@ -105,7 +113,7 @@ public class PointGrid : MonoBehaviour
                     }
                     totalForce += VectorForce(self, dir, k);
                 }
-                Debug.Log(totalForce);
+                // Debug.Log(totalForce);
                 GetPoint(x,y).transform.position += totalForce;
                 
             }
@@ -135,11 +143,40 @@ public class PointGrid : MonoBehaviour
 
     private float kFromXY(Vector3 lineCentre)
     {
-        Vector3 centre = new Vector3(4.5f, 0f, 4.5f);
-        Vector3 posXY = lineCentre - centre;
-        float magK = posXY.magnitude;
-        magK = 8 / ((magK + 1) * (magK + 1));
-        return magK;
+        // Vector3 centre = new Vector3(4.5f, 0f, 4.5f);
+        // Vector3 posXY = lineCentre - centre;
+        // float magK = posXY.magnitude;
+        // magK = 8 / ((magK + 1) * (magK + 1));
+        // return magK;
+        var fields = GameObject.FindGameObjectsWithTag("navifields");
+        float k = 0.5f;
+        float maxK = 2f;
+        foreach (GameObject field in fields)
+        {
+            float DistX = lineCentre.x - field.transform.position.x;
+            float DistZ = lineCentre.z - field.transform.position.z; 
+            float Dist = Mathf.Sqrt(DistX*DistX + DistZ*DistZ);
+            float InnerR = 0.5f * field.transform.localScale.x;
+            float OuterR = 0.75f * field.transform.localScale.x;
+            if (Dist >= OuterR){
+                
+            }
+            else if (Dist <= InnerR){
+                k = maxK;
+                
+            }
+            else if(Dist < OuterR && Dist > InnerR){
+                // float gradualK = (Dist - InnerR) * (1 / InnerR) * (maxK);
+                // if (gradualK < k){
+                //     k = gradualK;
+                // }
+                k = maxK;
+            }
+            
+        }
+        Debug.Log(k);
+
+        return k;
     }
 
     public Vector3 VectorForce(Vector3 original, Vector3 compared, float k) //Hooke's law is applied, the intensity variable serves a similar function as changing mass, but inversed
