@@ -104,10 +104,10 @@ public class PointGrid : MonoBehaviour
                 for (int x = 0; x < (numPointsX); x++) //draws the lines between each dot to show where the springs are
                 {
                     if (x < (numPointsX-1)){
-                    Debug.DrawLine(GetPoint(x,y).transform.position + new Vector3(0f,0.01f,0f),GetPoint(x+1,y).transform.position + new Vector3(0f,0.01f,0f),Color.gray, 0f);
+                    Debug.DrawLine(GetPoint(x,y).transform.position + new Vector3(0f,0.01f,0f),GetPoint(x+1,y).transform.position + new Vector3(0f,0.01f,0f),Color.red, 5f);
                     }
                     if (y < (numPointsY-1)){
-                    Debug.DrawLine(GetPoint(x,y).transform.position + new Vector3(0f,0.01f,0f),GetPoint(x,y+1).transform.position + new Vector3(0f,0.01f,0f),Color.gray, 0f);
+                    Debug.DrawLine(GetPoint(x,y).transform.position + new Vector3(0f,0.01f,0f),GetPoint(x,y+1).transform.position + new Vector3(0f,0.01f,0f),Color.red, 5f);
                     }
                     // if ((y < (numPointsY-1)) && (x < (numPointsX-1))){
                     // Debug.DrawLine(GetPoint(x,y).transform.position,GetPoint(x+1,y+1).transform.position,Color.white, 0f);
@@ -124,7 +124,7 @@ public class PointGrid : MonoBehaviour
             //Scaling variables:
 
             float hX = HeadSet.position.x - RigPos.transform.position.x; 
-            float hY = HeadSet.position.y - RigPos.transform.position.y;
+            float hY = RigPos.transform.position.y;
             float hZ = HeadSet.position.z - RigPos.transform.position.z;
 
             float playableSpacingX = (playableSecondX - playableFirstX) / (numPointsX - 1);
@@ -140,6 +140,10 @@ public class PointGrid : MonoBehaviour
 
                 bool whichTriangle = false; // splitting the square into two triangles to calculate position translation.
                 if ((relativeX - indexX) > (relativeY - indexY))
+                {
+                    whichTriangle = true;
+                }
+                else
                 {
                     whichTriangle = true;
                 }
@@ -216,7 +220,7 @@ public class PointGrid : MonoBehaviour
                 //Debug.Log(NewPosVector);
 
                 RigPos.transform.position = new Vector4(NewPosVector.x - hX, hY, NewPosVector.y - hZ);
-                Debug.Log(new Vector4(NewPosVector.x - hX, hY, NewPosVector.y - hZ));
+                //Debug.Log(new Vector4(NewPosVector.x - hX, hY, NewPosVector.y - hZ));
             }
 
             
@@ -269,10 +273,10 @@ public class PointGrid : MonoBehaviour
                 for (int x = 0; x < (numPointsX); x++) //draws the lines between each dot to show where the springs are
                 {
                     if (x < (numPointsX-1)){
-                    Debug.DrawLine(GetPoint(x,y).transform.position,GetPoint(x+1,y).transform.position,Color.red, 0f);
+                    Debug.DrawLine(GetPoint(x,y).transform.position,GetPoint(x+1,y).transform.position,Color.white, 0f);
                     }
                     if (y < (numPointsY-1)){
-                    Debug.DrawLine(GetPoint(x,y).transform.position,GetPoint(x,y+1).transform.position,Color.red, 0f);
+                    Debug.DrawLine(GetPoint(x,y).transform.position,GetPoint(x,y+1).transform.position,Color.white, 0f);
                     }
                     // if ((y < (numPointsY-1)) && (x < (numPointsX-1))){
                     // Debug.DrawLine(GetPoint(x,y).transform.position,GetPoint(x+1,y+1).transform.position,Color.white, 0f);
