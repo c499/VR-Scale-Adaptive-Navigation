@@ -876,18 +876,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7806e92c89d89704bbcffddefe08fd14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numPointsX: 100
-  numPointsY: 100
+  numPointsX: 50
+  numPointsY: 50
   firstX: -6
   firstY: -6
   secondX: 6
   secondY: 6
   minK: 0.2
-  maxK: 3
+  maxK: 4
   fieldR: 0.8
   innerFieldR: 0.2
   restLength: 0.0002
   intensity: 0.1
+  framesToSimulate: 400
   HeadPos: 0
   HeadSet: {fileID: 2090308135}
   RigPos: {fileID: 1552606501}
