@@ -878,17 +878,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numPointsX: 50
   numPointsY: 50
-  firstX: -6
-  firstY: -6
-  secondX: 6
-  secondY: 6
+  firstX: -7
+  firstY: -7
+  secondX: 7
+  secondY: 7
   minK: 0.2
   maxK: 4
   fieldR: 0.8
-  innerFieldR: 0.2
+  innerFieldR: 0.05
   restLength: 0.0002
-  intensity: 0.1
-  framesToSimulate: 400
+  intensity: 0.15
+  framesToSimulate: 200
   HeadPos: 0
   HeadSet: {fileID: 2090308135}
   RigPos: {fileID: 1552606501}
@@ -1719,7 +1719,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1552606501}
   - component: {fileID: 1552606503}
-  - component: {fileID: 1552606504}
   m_Layer: 0
   m_Name: XRRig
   m_TagString: Untagged
@@ -1762,18 +1761,6 @@ MonoBehaviour:
   m_TrackingOriginMode: 1
   m_TrackingSpace: 1
   m_CameraYOffset: 0
---- !u!114 &1552606504
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1552606500}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b065d53eb84f0cc47a7f59fd09cd2875, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1653146931 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400126, guid: 94f0d39dfbe48ce459e24caba36b01de,

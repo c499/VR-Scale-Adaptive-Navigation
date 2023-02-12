@@ -43,6 +43,8 @@ public class PointGrid : MonoBehaviour
 
     // Array to store the points
     GameObject[,] points;
+    public Vector3[,] pointsVector;
+    private bool hasConvertedPoints = false;
     float[,] linesHorizontalK;
     float[,] linesVerticalK;
 
@@ -50,8 +52,9 @@ public class PointGrid : MonoBehaviour
 
     void Start()
     {
-        // Initialize the points array
+        // Initialize the points arrays
         points = new GameObject[numPointsX, numPointsY];
+        pointsVector = new Vector3[numPointsX, numPointsY];
         linesHorizontalK = new float [numPointsX, numPointsY];
         linesVerticalK = new float [numPointsX, numPointsY];
 
@@ -108,12 +111,20 @@ public class PointGrid : MonoBehaviour
         for (int y = 0; y < (numPointsY); y++) //COLORED DebugLines for ORIGINAL GRID
             {
                 for (int x = 0; x < (numPointsX); x++) //draws the lines between each dot to show where the springs are
-                {
-                    if (x < (numPointsX-1)){
-                    Debug.DrawLine(GetPoint(x,y).transform.position + new Vector3(0f,0.01f,0f),GetPoint(x+1,y).transform.position + new Vector3(0f,0.01f,0f),Color.red, 5f);
+                    {
+                    //if (x < (numPointsX-1)){
+                    //Debug.DrawLine(GetPoint(x,y).transform.position + new Vector3(0f,0.01f,0f),GetPoint(x+1,y).transform.position + new Vector3(0f,0.01f,0f),Color.red, 1f);
+                    //}
+                    //if (y < (numPointsY-1)){
+                    //Debug.DrawLine(GetPoint(x,y).transform.position + new Vector3(0f,0.01f,0f),GetPoint(x,y+1).transform.position + new Vector3(0f,0.01f,0f),Color.red, 1f);
+                    //}
+                    if (x < (numPointsX - 1))
+                    {
+                        Debug.DrawLine(GetPoint(x, y).transform.position/((firstX-secondX)/(playableFirstX-playableSecondX)) + new Vector3(0f, 0.01f, 0f), GetPoint(x + 1, y).transform.position/ ((firstX - secondX) / (playableFirstX - playableSecondX)) + new Vector3(0f, 0.01f, 0f), Color.red, 500f);
                     }
-                    if (y < (numPointsY-1)){
-                    Debug.DrawLine(GetPoint(x,y).transform.position + new Vector3(0f,0.01f,0f),GetPoint(x,y+1).transform.position + new Vector3(0f,0.01f,0f),Color.red, 5f);
+                    if (y < (numPointsY - 1))
+                    {
+                        Debug.DrawLine(GetPoint(x, y).transform.position / ((firstY - secondY) / (playableFirstY - playableSecondY)) + new Vector3(0f, 0.01f, 0f), GetPoint(x, y + 1).transform.position / ((firstY - secondY) / (playableFirstY - playableSecondY)) + new Vector3(0f, 0.01f, 0f), Color.red, 500f);
                     }
                     // if ((y < (numPointsY-1)) && (x < (numPointsX-1))){
                     // Debug.DrawLine(GetPoint(x,y).transform.position,GetPoint(x+1,y+1).transform.position,Color.white, 0f);
@@ -127,6 +138,38 @@ public class PointGrid : MonoBehaviour
     {
         if (frameCount == framesToSimulate)
         {
+            if (hasConvertedPoints == false)
+            {
+                for (int y = 0; y < numPointsY; y++)
+                {
+                    for (int x = 0; x < numPointsX; x++)
+                    {
+                        pointsVector[x, y] = GetPoint(x, y).transform.position;
+                        Destroy(points[x, y]);
+                    }
+                }
+                for (int y = 0; y < (numPointsY); y++) //DebugLines for SPRING SIMULATION
+                {
+                    for (int x = 0; x < (numPointsX); x++) //draws the lines between each dot to show where the springs are
+                    {
+                        if (x < (numPointsX - 1))
+                        {
+                            Debug.DrawLine(GetPointVector(x, y), GetPointVector(x + 1, y), Color.white, 500f);
+                        }
+                        if (y < (numPointsY - 1))
+                        {
+                            Debug.DrawLine(GetPointVector(x, y), GetPointVector(x, y + 1), Color.white, 500f);
+                        }
+                        if ((y < (numPointsY - 1)) && (x < (numPointsX - 1)))
+                        {
+                            Debug.DrawLine(GetPointVector(x, y), GetPointVector(x + 1, y + 1), new Vector4(0.1f, 0.1f, 0.1f, 1), 500f);
+                        }
+                    }
+                }
+                hasConvertedPoints = true;
+                Debug.Log("Points have been converted");
+            }
+
             //Scaling variables:
 
             float hX = HeadSet.position.x - RigPos.transform.position.x; 
@@ -153,7 +196,7 @@ public class PointGrid : MonoBehaviour
                 {
                     whichTriangle = false;
                 }
-                Debug.Log(indexX + " ___ " + indexY + " " + whichTriangle);
+                //Debug.Log(indexX + " ___ " + indexY + " " + whichTriangle);
 
                 //Matrix equation used: https://stackoverflow.com/questions/18844000/transfer-coordinates-from-one-triangle-to-another-triangle
 
@@ -180,28 +223,28 @@ public class PointGrid : MonoBehaviour
                 float ya2;
                 float ya3 = playableFirstY + (playableSpacingY * (indexY + 1));
                 
-                float xb1 = GetPoint(indexX,indexY).transform.position.x;
+                float xb1 = GetPointVector(indexX,indexY).x;
                 float xb2;
-                float xb3 = GetPoint((indexX + 1),(indexY + 1)).transform.position.x;
+                float xb3 = GetPointVector((indexX + 1),(indexY + 1)).x;
 
-                float yb1 = GetPoint(indexX,indexY).transform.position.z;
+                float yb1 = GetPointVector(indexX,indexY).z;
                 float yb2;
-                float yb3 = GetPoint((indexX + 1),(indexY + 1)).transform.position.z;
+                float yb3 = GetPointVector((indexX + 1),(indexY + 1)).z;
 
                 if (whichTriangle == false)
                 {
                     xa2 = playableFirstX + (playableSpacingX * indexX);
                     ya2 = playableFirstY + (playableSpacingY * (indexY + 1));
-                    xb2 = GetPoint(indexX,(indexY + 1)).transform.position.x;
-                    yb2 = GetPoint(indexX,(indexY + 1)).transform.position.z;
+                    xb2 = GetPointVector(indexX,(indexY + 1)).x;
+                    yb2 = GetPointVector(indexX,(indexY + 1)).z;
 
                 }
                 else
                 {
                     xa2 = playableFirstX + (playableSpacingX * (indexX + 1));
                     ya2 = playableFirstY + (playableSpacingY * indexY);
-                    xb2 = GetPoint((indexX + 1),indexY).transform.position.x;
-                    yb2 = GetPoint((indexX + 1),indexY).transform.position.z;
+                    xb2 = GetPointVector((indexX + 1),indexY).x;
+                    yb2 = GetPointVector((indexX + 1),indexY).z;
 
                 }
 
@@ -273,29 +316,37 @@ public class PointGrid : MonoBehaviour
                     
                 }
             }
-
-        }
-        for (int y = 0; y < (numPointsY); y++) //DebugLines for SPRING SIMULATION
+            for (int y = 0; y < (numPointsY); y++) //DebugLines for SPRING SIMULATION
             {
                 for (int x = 0; x < (numPointsX); x++) //draws the lines between each dot to show where the springs are
                 {
-                    if (x < (numPointsX-1)){
-                    Debug.DrawLine(GetPoint(x,y).transform.position,GetPoint(x+1,y).transform.position,Color.white, 0f);
+                    if (x < (numPointsX - 1))
+                    {
+                        Debug.DrawLine(GetPoint(x, y).transform.position, GetPoint(x + 1, y).transform.position, Color.white, 0f);
                     }
-                    if (y < (numPointsY-1)){
-                    Debug.DrawLine(GetPoint(x,y).transform.position,GetPoint(x,y+1).transform.position,Color.white, 0f);
+                    if (y < (numPointsY - 1))
+                    {
+                        Debug.DrawLine(GetPoint(x, y).transform.position, GetPoint(x, y + 1).transform.position, Color.white, 0f);
                     }
-                    // if ((y < (numPointsY-1)) && (x < (numPointsX-1))){
-                    // Debug.DrawLine(GetPoint(x,y).transform.position,GetPoint(x+1,y+1).transform.position,Color.white, 0f);
-                    // }
+                    if ((y < (numPointsY - 1)) && (x < (numPointsX - 1)))
+                    {
+                        Debug.DrawLine(GetPoint(x, y).transform.position, GetPoint(x + 1, y + 1).transform.position, new Vector4(0.1f, 0.1f, 0.1f, 1), 0f);
+                    }
                 }
             }
+        }
+
     }
 
     // Function to retrieve a point at a specific index in the grid
     public GameObject GetPoint(int x, int y)
     {
         return points[x, y];
+    }
+
+    public Vector3 GetPointVector(int x, int y)
+    {
+        return pointsVector[x, y];
     }
 
     private float kFromXY(Vector3 lineCentre)
