@@ -8,6 +8,8 @@ public class PointGrid : MonoBehaviour
 {
 
     // Number of points in each dimension of the grid
+    public bool originalGrid = true;
+    public bool warpedGrid = true;
     public int numPointsX = 20;
     public int numPointsY = 20;
     public float firstX = 0.0f;
@@ -64,10 +66,10 @@ public class PointGrid : MonoBehaviour
         numLinesX = numPointsX - 1;
         numLinesY = numPointsY - 1;
 
-        Debug.DrawLine(new Vector3(4f, 0.01f, 0f), new Vector3(4f + (playableSecondX - playableFirstX) / (numPointsX - 1), 0.01f, 0f), Color.yellow, 500f);
-        Debug.DrawLine(new Vector3(4f, 0.01f, 0f), new Vector3(4f, 0.01f, (playableSecondY - playableFirstY) / (numPointsY - 1)), Color.yellow, 500f);
-        Debug.DrawLine(new Vector3(4f + (playableSecondX - playableFirstX) / (numPointsX - 1), 0.01f, (playableSecondY - playableFirstY) / (numPointsY - 1)), new Vector3(4f, 0.01f, (playableSecondY - playableFirstY) / (numPointsY - 1)), Color.yellow, 500f);
-        Debug.DrawLine(new Vector3(4f + (playableSecondX - playableFirstX) / (numPointsX - 1), 0.01f, (playableSecondY - playableFirstY) / (numPointsY - 1)), new Vector3(4f + (playableSecondX - playableFirstX) / (numPointsX - 1), 0.01f, 0f), Color.yellow, 500f);
+        //Debug.DrawLine(new Vector3(4f, 0.01f, 0f), new Vector3(4f + (playableSecondX - playableFirstX) / (numPointsX - 1), 0.01f, 0f), Color.yellow, 500f);
+        //Debug.DrawLine(new Vector3(4f, 0.01f, 0f), new Vector3(4f, 0.01f, (playableSecondY - playableFirstY) / (numPointsY - 1)), Color.yellow, 500f);
+        //Debug.DrawLine(new Vector3(4f + (playableSecondX - playableFirstX) / (numPointsX - 1), 0.01f, (playableSecondY - playableFirstY) / (numPointsY - 1)), new Vector3(4f, 0.01f, (playableSecondY - playableFirstY) / (numPointsY - 1)), Color.yellow, 500f);
+        //Debug.DrawLine(new Vector3(4f + (playableSecondX - playableFirstX) / (numPointsX - 1), 0.01f, (playableSecondY - playableFirstY) / (numPointsY - 1)), new Vector3(4f + (playableSecondX - playableFirstX) / (numPointsX - 1), 0.01f, 0f), Color.yellow, 500f);
 
 
 
@@ -107,30 +109,40 @@ public class PointGrid : MonoBehaviour
                 linesVerticalK[x,y] = kFromXY(lineCentre);
             }
         }
-
-        for (int y = 0; y < (numPointsY); y++) //COLORED DebugLines for ORIGINAL GRID
+        if (originalGrid == true)
+        {
+            for (int y = 0; y < (numPointsY); y++) //COLORED DebugLines for ORIGINAL GRID
             {
                 for (int x = 0; x < (numPointsX); x++) //draws the lines between each dot to show where the springs are
-                    {
-                    //if (x < (numPointsX-1)){
-                    //Debug.DrawLine(GetPoint(x,y).transform.position + new Vector3(0f,0.01f,0f),GetPoint(x+1,y).transform.position + new Vector3(0f,0.01f,0f),Color.red, 1f);
-                    //}
-                    //if (y < (numPointsY-1)){
-                    //Debug.DrawLine(GetPoint(x,y).transform.position + new Vector3(0f,0.01f,0f),GetPoint(x,y+1).transform.position + new Vector3(0f,0.01f,0f),Color.red, 1f);
-                    //}
+                {
                     if (x < (numPointsX - 1))
                     {
-                        Debug.DrawLine(GetPoint(x, y).transform.position/((firstX-secondX)/(playableFirstX-playableSecondX)) + new Vector3(0f, 0.01f, 0f), GetPoint(x + 1, y).transform.position/ ((firstX - secondX) / (playableFirstX - playableSecondX)) + new Vector3(0f, 0.01f, 0f), Color.red, 500f);
+                        Debug.DrawLine(GetPoint(x, y).transform.position + new Vector3(0f, 0.01f, 0f), GetPoint(x + 1, y).transform.position + new Vector3(0f, 0.01f, 0f), Color.red, 1f);
+                    }
+                    if (y < (numPointsY - 1))
+                    {
+                        Debug.DrawLine(GetPoint(x, y).transform.position + new Vector3(0f, 0.01f, 0f), GetPoint(x, y + 1).transform.position + new Vector3(0f, 0.01f, 0f), Color.red, 1f);
+                    }
+
+
+                    if (x < (numPointsX - 1))
+                    {
+                        Debug.DrawLine(GetPoint(x, y).transform.position / ((firstX - secondX) / (playableFirstX - playableSecondX)) + new Vector3(0f, 0.01f, 0f), GetPoint(x + 1, y).transform.position / ((firstX - secondX) / (playableFirstX - playableSecondX)) + new Vector3(0f, 0.01f, 0f), Color.red, 500f);
                     }
                     if (y < (numPointsY - 1))
                     {
                         Debug.DrawLine(GetPoint(x, y).transform.position / ((firstY - secondY) / (playableFirstY - playableSecondY)) + new Vector3(0f, 0.01f, 0f), GetPoint(x, y + 1).transform.position / ((firstY - secondY) / (playableFirstY - playableSecondY)) + new Vector3(0f, 0.01f, 0f), Color.red, 500f);
                     }
-                    // if ((y < (numPointsY-1)) && (x < (numPointsX-1))){
-                    // Debug.DrawLine(GetPoint(x,y).transform.position,GetPoint(x+1,y+1).transform.position,Color.white, 0f);
-                    // }
+
+
+                    if ((y < (numPointsY - 1)) && (x < (numPointsX - 1)))
+                    {
+                        Debug.DrawLine(GetPoint(x, y).transform.position, GetPoint(x + 1, y + 1).transform.position, Color.white, 0f);
+                    }
                 }
             }
+        }
+
 
     }
 
@@ -148,24 +160,28 @@ public class PointGrid : MonoBehaviour
                         Destroy(points[x, y]);
                     }
                 }
-                for (int y = 0; y < (numPointsY); y++) //DebugLines for SPRING SIMULATION
+                if (warpedGrid == true)
                 {
-                    for (int x = 0; x < (numPointsX); x++) //draws the lines between each dot to show where the springs are
+                    for (int y = 0; y < (numPointsY); y++) //DebugLines for SPRING SIMULATION
                     {
-                        if (x < (numPointsX - 1))
+                        for (int x = 0; x < (numPointsX); x++) //draws the lines between each dot to show where the springs are
                         {
-                            Debug.DrawLine(GetPointVector(x, y), GetPointVector(x + 1, y), Color.white, 500f);
-                        }
-                        if (y < (numPointsY - 1))
-                        {
-                            Debug.DrawLine(GetPointVector(x, y), GetPointVector(x, y + 1), Color.white, 500f);
-                        }
-                        if ((y < (numPointsY - 1)) && (x < (numPointsX - 1)))
-                        {
-                            Debug.DrawLine(GetPointVector(x, y), GetPointVector(x + 1, y + 1), new Vector4(0.1f, 0.1f, 0.1f, 1), 500f);
+                            if (x < (numPointsX - 1))
+                            {
+                                Debug.DrawLine(GetPointVector(x, y), GetPointVector(x + 1, y), Color.white, 500f);
+                            }
+                            if (y < (numPointsY - 1))
+                            {
+                                Debug.DrawLine(GetPointVector(x, y), GetPointVector(x, y + 1), Color.white, 500f);
+                            }
+                            if ((y < (numPointsY - 1)) && (x < (numPointsX - 1)))
+                            {
+                                Debug.DrawLine(GetPointVector(x, y), GetPointVector(x + 1, y + 1), new Vector4(0.1f, 0.1f, 0.1f, 1), 500f);
+                            }
                         }
                     }
                 }
+
                 hasConvertedPoints = true;
                 Debug.Log("Points have been converted");
             }
@@ -316,24 +332,28 @@ public class PointGrid : MonoBehaviour
                     
                 }
             }
-            for (int y = 0; y < (numPointsY); y++) //DebugLines for SPRING SIMULATION
+            if (warpedGrid == true)
             {
-                for (int x = 0; x < (numPointsX); x++) //draws the lines between each dot to show where the springs are
+                for (int y = 0; y < (numPointsY); y++) //DebugLines for SPRING SIMULATION
                 {
-                    if (x < (numPointsX - 1))
+                    for (int x = 0; x < (numPointsX); x++) //draws the lines between each dot to show where the springs are
                     {
-                        Debug.DrawLine(GetPoint(x, y).transform.position, GetPoint(x + 1, y).transform.position, Color.white, 0f);
-                    }
-                    if (y < (numPointsY - 1))
-                    {
-                        Debug.DrawLine(GetPoint(x, y).transform.position, GetPoint(x, y + 1).transform.position, Color.white, 0f);
-                    }
-                    if ((y < (numPointsY - 1)) && (x < (numPointsX - 1)))
-                    {
-                        Debug.DrawLine(GetPoint(x, y).transform.position, GetPoint(x + 1, y + 1).transform.position, new Vector4(0.1f, 0.1f, 0.1f, 1), 0f);
+                        if (x < (numPointsX - 1))
+                        {
+                            Debug.DrawLine(GetPoint(x, y).transform.position, GetPoint(x + 1, y).transform.position, Color.white, 0f);
+                        }
+                        if (y < (numPointsY - 1))
+                        {
+                            Debug.DrawLine(GetPoint(x, y).transform.position, GetPoint(x, y + 1).transform.position, Color.white, 0f);
+                        }
+                        if ((y < (numPointsY - 1)) && (x < (numPointsX - 1)))
+                        {
+                            Debug.DrawLine(GetPoint(x, y).transform.position, GetPoint(x + 1, y + 1).transform.position, new Vector4(0.1f, 0.1f, 0.1f, 1), 0f);
+                        }
                     }
                 }
             }
+
         }
 
     }

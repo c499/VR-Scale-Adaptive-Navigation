@@ -192,6 +192,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Medieval_Building_LowPoly_V1 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 182156, guid: 3fd4a442a13c4f746a030b1f898f424a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 420490, guid: 3fd4a442a13c4f746a030b1f898f424a, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -248,6 +252,10 @@ PrefabInstance:
     - target: {fileID: 156514, guid: 5fa0fc4910fa1e140b99f82b01cc0477, type: 3}
       propertyPath: m_Name
       value: Medieval_Building_LowPoly_V2
+      objectReference: {fileID: 0}
+    - target: {fileID: 156514, guid: 5fa0fc4910fa1e140b99f82b01cc0477, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 499944, guid: 5fa0fc4910fa1e140b99f82b01cc0477, type: 3}
       propertyPath: m_RootOrder
@@ -311,6 +319,10 @@ PrefabInstance:
     - target: {fileID: 151318, guid: 1688cf80e3928914a88c9d25662990d0, type: 3}
       propertyPath: m_Name
       value: Medieval_Building_LowPoly_V4 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 151318, guid: 1688cf80e3928914a88c9d25662990d0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 403586, guid: 1688cf80e3928914a88c9d25662990d0, type: 3}
       propertyPath: m_RootOrder
@@ -476,6 +488,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Medieval_Building_LowPoly_V5
       objectReference: {fileID: 0}
+    - target: {fileID: 151326, guid: 3afa0fc57395a074d9383351b4a5d95d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 465728, guid: 3afa0fc57395a074d9383351b4a5d95d, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -629,6 +645,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Medieval_Building_LowPoly_V4
       objectReference: {fileID: 0}
+    - target: {fileID: 151318, guid: 1688cf80e3928914a88c9d25662990d0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 403586, guid: 1688cf80e3928914a88c9d25662990d0, type: 3}
       propertyPath: m_RootOrder
       value: 11
@@ -762,7 +782,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 686642830}
   m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalPosition: {x: 16.75, y: 3, z: 9.67}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -785,6 +805,10 @@ PrefabInstance:
     - target: {fileID: 186626, guid: 94f0d39dfbe48ce459e24caba36b01de, type: 3}
       propertyPath: m_Name
       value: Medieval_Building_LowPoly_V6 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 186626, guid: 94f0d39dfbe48ce459e24caba36b01de, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400126, guid: 94f0d39dfbe48ce459e24caba36b01de, type: 3}
       propertyPath: m_RootOrder
@@ -876,6 +900,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7806e92c89d89704bbcffddefe08fd14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  originalGrid: 0
+  warpedGrid: 1
   numPointsX: 50
   numPointsY: 50
   firstX: -7
@@ -892,10 +918,10 @@ MonoBehaviour:
   HeadPos: 0
   HeadSet: {fileID: 2090308135}
   RigPos: {fileID: 1552606501}
-  playableFirstX: -0.75
-  playableFirstY: -0.75
-  playableSecondX: 0.75
-  playableSecondY: 0.75
+  playableFirstX: -2
+  playableFirstY: -2
+  playableSecondX: 2
+  playableSecondY: 2
   pointPrefab: {fileID: 7261647435722391024, guid: 6428dd8300ba15e428b6c01740b6d46a,
     type: 3}
 --- !u!1 &917613117
@@ -937,7 +963,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 917613117}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9c63a5d740aace04389fa6399d8ba8ed, type: 3}
   m_Name: 
@@ -1139,6 +1165,10 @@ PrefabInstance:
     - target: {fileID: 182156, guid: 3fd4a442a13c4f746a030b1f898f424a, type: 3}
       propertyPath: m_Name
       value: Medieval_Building_LowPoly_V1 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 182156, guid: 3fd4a442a13c4f746a030b1f898f424a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 420490, guid: 3fd4a442a13c4f746a030b1f898f424a, type: 3}
       propertyPath: m_RootOrder
@@ -1368,6 +1398,10 @@ PrefabInstance:
     - target: {fileID: 151318, guid: 1688cf80e3928914a88c9d25662990d0, type: 3}
       propertyPath: m_Name
       value: Medieval_Building_LowPoly_V4 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 151318, guid: 1688cf80e3928914a88c9d25662990d0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 403586, guid: 1688cf80e3928914a88c9d25662990d0, type: 3}
       propertyPath: m_RootOrder
@@ -1606,6 +1640,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Medieval_Building_LowPoly_V1
       objectReference: {fileID: 0}
+    - target: {fileID: 182156, guid: 3fd4a442a13c4f746a030b1f898f424a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 420490, guid: 3fd4a442a13c4f746a030b1f898f424a, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -1662,6 +1700,10 @@ PrefabInstance:
     - target: {fileID: 186626, guid: 94f0d39dfbe48ce459e24caba36b01de, type: 3}
       propertyPath: m_Name
       value: Medieval_Building_LowPoly_V6 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 186626, guid: 94f0d39dfbe48ce459e24caba36b01de, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400126, guid: 94f0d39dfbe48ce459e24caba36b01de, type: 3}
       propertyPath: m_RootOrder
@@ -1734,7 +1776,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1552606500}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 18, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1835,7 +1877,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8d530ffe6c4968843806085897955b9d, type: 2}
+  - {fileID: 2100000, guid: 1af421c0c92acbf4791cc79db66f9e15, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1875,6 +1917,10 @@ PrefabInstance:
     - target: {fileID: 186626, guid: 94f0d39dfbe48ce459e24caba36b01de, type: 3}
       propertyPath: m_Name
       value: Medieval_Building_LowPoly_V6
+      objectReference: {fileID: 0}
+    - target: {fileID: 186626, guid: 94f0d39dfbe48ce459e24caba36b01de, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400126, guid: 94f0d39dfbe48ce459e24caba36b01de, type: 3}
       propertyPath: m_RootOrder
@@ -1979,6 +2025,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Medieval_Building_LowPoly_V3
       objectReference: {fileID: 0}
+    - target: {fileID: 196944, guid: 8aa1c309eb0408f43bb81330b5301411, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 494508, guid: 8aa1c309eb0408f43bb81330b5301411, type: 3}
       propertyPath: m_RootOrder
       value: 13
@@ -2035,6 +2085,10 @@ PrefabInstance:
     - target: {fileID: 186626, guid: 94f0d39dfbe48ce459e24caba36b01de, type: 3}
       propertyPath: m_Name
       value: Medieval_Building_LowPoly_V6 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 186626, guid: 94f0d39dfbe48ce459e24caba36b01de, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400126, guid: 94f0d39dfbe48ce459e24caba36b01de, type: 3}
       propertyPath: m_RootOrder
@@ -2364,6 +2418,10 @@ PrefabInstance:
     - target: {fileID: 151318, guid: 1688cf80e3928914a88c9d25662990d0, type: 3}
       propertyPath: m_Name
       value: Medieval_Building_LowPoly_V4 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 151318, guid: 1688cf80e3928914a88c9d25662990d0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 403586, guid: 1688cf80e3928914a88c9d25662990d0, type: 3}
       propertyPath: m_RootOrder
